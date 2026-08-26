@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>SIST-EB — Mockup de interfaz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#0E2438;
+    --navy-900:#14304D;
+    --navy-800:#1B3F60;
+    --teal-700:#0F5C56;
+    --teal-600:#1C7C74;
+    --teal-500:#2C9C92;
+    --bg:#EEF1F4;
+    --surface:#FFFFFF;
+    --border:#D7DEE3;
+    --text:#16212B;
+    --text-soft:#5B6B78;
+    --ok:#2F8F5B;
+    --ok-bg:#E7F4ED;
+    --warn:#C97F1E;
+    --warn-bg:#FBEEDD;
+    --crit:#C2483F;
+    --crit-bg:#FBE9E7;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .app{
+    display:grid;
+    grid-template-columns:236px 1fr;
+    min-height:100vh;
+  }
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar{
+    background:linear-gradient(180deg,var(--navy-950),var(--navy-900) 60%);
+    color:#EAF1F6;
+    padding:22px 16px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:4px 8px 22px 8px;
+  }
+  .brand-mark{
+    width:34px;height:34px;border-radius:8px;
+    background:linear-gradient(135deg,var(--teal-500),var(--teal-700));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:white;
+    flex-shrink:0;
+  }
+  .brand-text{line-height:1.15;}
+  .brand-text .name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;letter-spacing:.2px;}
+  .brand-text .sub{font-size:10.5px;color:#8CA3B5;letter-spacing:.4px;text-transform:uppercase;}
+
+  .nav-section{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:#6E8598;margin:16px 10px 6px;}
+  .nav-item{
+    display:flex;align-items:center;gap:11px;
+    padding:9px 11px;border-radius:8px;
+    font-size:13.5px;font-weight:500;color:#C3D2DE;
+    cursor:pointer;user-select:none;
+  }
+  .nav-item svg{width:17px;height:17px;flex-shrink:0;opacity:.85;}
+  .nav-item:hover{background:rgba(255,255,255,0.06);}
+  .nav-item.active{background:rgba(44,156,146,0.18);color:#fff;}
+  .nav-item.active svg{opacity:1;color:var(--teal-500);}
+
+  .sidebar-foot{
+    margin-top:auto;
+    border-top:1px solid rgba(255,255,255,0.08);
+    padding-top:14px;
+    display:flex;align-items:center;gap:10px;
+    padding-left:8px;
+  }
+  .avatar{
+    width:30px;height:30px;border-radius:50%;
+    background:#3A5772;color:#fff;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk',sans-serif;
+  }
+  .who .n{font-size:12.5px;font-weight:600;color:#EAF1F6;}
+  .who .r{font-size:10.5px;color:#8CA3B5;}
+
+  /* ---------- MAIN ---------- */
+  .main{display:flex;flex-direction:column;min-height:100vh;}
+  .topbar{
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+    padding:14px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .crumbs{font-size:12.5px;color:var(--text-soft);}
+  .crumbs b{color:var(--text);font-weight:600;}
+  .tabs{display:flex;gap:2px;background:#E4E9ED;padding:3px;border-radius:9px;}
+  .tab-btn{
+    border:none;background:transparent;padding:7px 14px;border-radius:7px;
+    font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;color:var(--text-soft);
+    cursor:pointer;
+  }
+  .tab-btn.active{background:var(--surface);color:var(--navy-900);box-shadow:0 1px 2px rgba(20,48,77,.12);}
+  .search{
+    display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--border);
+    border-radius:8px;padding:7px 10px;font-size:12.5px;color:var(--text-soft);width:230px;
+  }
+  .search svg{width:14px;height:14px;opacity:.6;flex-shrink:0;}
+
+  .view{padding:24px 28px 40px;flex:1;display:none;}
+  .view.active{display:block;}
+
+  h1.page-title{font-family:'Space Grotesk',sans-serif;font-size:21px;margin:0 0 4px;color:var(--navy-950);}
+  p.page-sub{font-size:13px;color:var(--text-soft);margin:0 0 22px;}
+
+  /* KPI cards */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;}
+  .kpi{
+    background:var(--surface);border:1px solid var(--border);border-radius:12px;
+    padding:16px 18px;position:relative;overflow:hidden;
+  }
+  .kpi .label{font-size:11.5px;color:var(--text-soft);font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
+  .kpi .value{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--navy-950);margin-top:6px;}
+  .kpi .unit{font-size:13px;font-weight:500;color:var(--text-soft);}
+  .kpi .delta{font-size:11px;margin-top:6px;font-weight:600;}
+  .kpi .delta.up{color:var(--ok);}
+  .kpi .delta.down{color:var(--crit);}
+  .kpi .spark{position:absolute;right:14px;bottom:12px;opacity:.9;}
+
+  .grid-2{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;margin-bottom:16px;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+  .card h3{font-family:'Space Grotesk',sans-serif;font-size:14.5px;margin:0 0 3px;color:var(--navy-950);}
+  .card .card-sub{font-size:11.5px;color:var(--text-soft);margin:0 0 14px;}
+
+  /* bar chart */
+  .bars{display:flex;align-items:flex-end;gap:10px;height:130px;padding-top:6px;}
+  .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px;}
+  .bar{width:100%;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,var(--teal-500),var(--teal-700));}
+  .bar-col .m{font-size:10px;color:var(--text-soft);font-weight:600;}
+
+  /* alerts list */
+  .alert-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);}
+  .alert-item:last-child{border-bottom:none;padding-bottom:0;}
+  .dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+  .dot.crit{background:var(--crit);} .dot.warn{background:var(--warn);}
+  .alert-item .t{font-size:12.5px;font-weight:600;color:var(--text);}
+  .alert-item .d{font-size:11.5px;color:var(--text-soft);margin-top:1px;}
+  .tag{font-size:10px;font-family:'IBM Plex Mono',monospace;padding:1px 6px;border-radius:4px;font-weight:600;}
+  .tag.crit{background:var(--crit-bg);color:var(--crit);}
+  .tag.warn{background:var(--warn-bg);color:var(--warn);}
+
+  /* equipment table */
+  table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  th{
+    text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;
+    color:var(--text-soft);padding:0 12px 10px;font-weight:700;border-bottom:1px solid var(--border);
+  }
+  td{padding:11px 12px;border-bottom:1px solid #EDF0F2;vertical-align:middle;}
+  tr:last-child td{border-bottom:none;}
+  .id-mono{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--navy-900);font-weight:600;}
+  .status-pill{
+    display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 8px;border-radius:20px;
+    font-size:11px;font-weight:600;
+  }
+  .status-pill.ok{background:var(--ok-bg);color:var(--ok);}
+  .status-pill.warn{background:var(--warn-bg);color:var(--warn);}
+  .status-pill.crit{background:var(--crit-bg);color:var(--crit);}
+  .status-pill .sd{width:6px;height:6px;border-radius:50%;background:currentColor;}
+  .row-name{font-weight:600;color:var(--text);}
+  .row-sub{font-size:11px;color:var(--text-soft);}
+
+  /* ---------- HOJA DE VIDA ---------- */
+  .eq-header{
+    background:var(--surface);border:1px solid var(--border);border-radius:14px;
+    padding:22px 24px;display:flex;gap:22px;margin-bottom:16px;
+  }
+  .eq-photo{
+    width:120px;height:120px;border-radius:12px;flex-shrink:0;
+    background:
+      radial-gradient(circle at 30% 30%, #2C9C92 0%, #14304D 70%);
+    display:flex;align-items:center;justify-content:center;color:#fff;
+  }
+  .eq-info{flex:1;}
+  .eq-info .eq-name-row{display:flex;align-items:center;gap:10px;margin-bottom:2px;}
+  .eq-info h2{font-family:'Space Grotesk',sans-serif;font-size:19px;margin:0;color:var(--navy-950);}
+  .eq-info .eq-id{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-soft);margin-bottom:14px;}
+  .spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:12px;}
+  .spec-grid .s-label{font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--text-soft);font-weight:700;}
+  .spec-grid .s-val{font-size:13px;font-weight:600;color:var(--text);margin-top:2px;}
+  .qr-box{
+    width:110px;height:110px;flex-shrink:0;background:var(--surface);border:1px solid var(--border);
+    border-radius:10px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;
+  }
+
+  .vitals{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px;}
+  .vital-card{background:var(--navy-900);border-radius:12px;padding:14px 16px;color:#EAF1F6;position:relative;overflow:hidden;}
+  .vital-card .vl{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:#9FB6C6;font-weight:600;}
+  .vital-card .vv{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;margin-top:4px;color:#fff;}
+  .vital-card .vv span{font-size:12px;color:#9FB6C6;}
+  .wave{margin-top:8px;opacity:.85;}
+
+  .sub-tabs{display:flex;gap:22px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+  .sub-tab{padding:9px 2px;font-size:13px;font-weight:600;color:var(--text-soft);cursor:pointer;border-bottom:2px solid transparent;}
+  .sub-tab.active{color:var(--navy-950);border-bottom-color:var(--teal-600);}
+
+  .timeline{display:flex;flex-direction:column;}
+  .t-item{display:flex;gap:14px;padding-bottom:20px;position:relative;}
+  .t-item:not(:last-child)::before{
+    content:"";position:absolute;left:5.5px;top:16px;bottom:0;width:1.5px;background:var(--border);
+  }
+  .t-dot{width:12px;height:12px;border-radius:50%;margin-top:3px;flex-shrink:0;border:2px solid var(--surface);box-shadow:0 0 0 1.5px currentColor;}
+  .t-dot.ok{color:var(--ok);background:var(--ok);}
+  .t-dot.warn{color:var(--warn);background:var(--warn);}
+  .t-body .t-title{font-size:13px;font-weight:600;color:var(--text);}
+  .t-body .t-meta{font-size:11.5px;color:var(--text-soft);margin-top:1px;}
+  .t-body .t-desc{font-size:12px;color:var(--text-soft);margin-top:5px;background:var(--bg);padding:8px 10px;border-radius:8px;}
+
+  /* ---------- ASISTENTE IA ---------- */
+  .chat-wrap{display:grid;grid-template-columns:1fr 260px;gap:16px;}
+  .chat-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;display:flex;flex-direction:column;height:600px;}
+  .chat-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+  .chat-head .ai-dot{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px var(--ok-bg);}
+  .chat-head b{font-size:13.5px;}
+  .chat-head span{font-size:11.5px;color:var(--text-soft);}
+  .chat-body{flex:1;padding:18px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;}
+  .msg{max-width:78%;padding:12px 14px;border-radius:12px;font-size:13px;line-height:1.5;}
+  .msg.user{align-self:flex-end;background:var(--navy-900);color:#fff;border-bottom-right-radius:3px;}
+  .msg.ai{align-self:flex-start;background:var(--bg);color:var(--text);border-bottom-left-radius:3px;}
+  .msg.ai .cite{
+    margin-top:9px;padding-top:8px;border-top:1px solid var(--border);
+    font-size:11px;color:var(--teal-700);font-weight:600;display:flex;align-items:center;gap:5px;
+  }
+  .chat-input{padding:14px 16px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:center;}
+  .chat-input input{
+    flex:1;border:1px solid var(--border);background:var(--bg);border-radius:9px;padding:10px 12px;
+    font-family:'Inter';font-size:13px;color:var(--text);
+  }
+  .send-btn{
+    background:var(--teal-600);border:none;width:38px;height:38px;border-radius:9px;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;
+  }
+  .send-btn svg{width:16px;height:16px;color:#fff;}
+
+  .side-panel .card{margin-bottom:14px;}
+  .doc-chip{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid #EDF0F2;font-size:12px;}
+  .doc-chip:last-child{border-bottom:none;}
+  .doc-ic{width:26px;height:26px;border-radius:6px;background:var(--teal-500);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .doc-name{font-weight:600;color:var(--text);}
+  .doc-meta{font-size:10.5px;color:var(--text-soft);}
+  .suggestion{
+    font-size:12px;padding:9px 11px;border:1px solid var(--border);border-radius:9px;margin-bottom:8px;
+    color:var(--navy-900);font-weight:500;cursor:pointer;
+  }
+  .suggestion:hover{border-color:var(--teal-500);background:#F3FAF9;}
+
+  ::-webkit-scrollbar{width:8px;}
+  ::-webkit-scrollbar-thumb{background:#C7D1D8;border-radius:8px;}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">EB</div>
+      <div class="brand-text">
+        <div class="name">SIST-EB</div>
+        <div class="sub">Soporte Biomédico</div>
+      </div>
+    </div>
+
+    <div class="nav-section">General</div>
+    <div class="nav-item active" onclick="showView('dashboard')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+      Dashboard
+    </div>
+    <div class="nav-item" onclick="showView('ficha')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+      Equipos
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.1-3.1a5 5 0 01-6.6 6.6L6 21l-3-3 9.2-9.2a5 5 0 016.6-6.6l-3.1 3.1z"/></svg>
+      Mantenimiento
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+      Checklists
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/><path d="M14 3v6h6"/></svg>
+      Documentación
+    </div>
+
+    <div class="nav-section">Inteligencia</div>
+    <div class="nav-item" onclick="showView('asistente')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="12" rx="2.5"/><path d="M9 21h6M9 17v4M15 17v4"/><circle cx="9" cy="11" r="1"/><circle cx="15" cy="11" r="1"/></svg>
+      Asistente IA
+    </div>
+
+    <div class="nav-section">Sistema</div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><circle cx="18" cy="8" r="2.4"/><path d="M15.5 20a5 5 0 016.7-2.7"/></svg>
+      Usuarios
+    </div>
+
+    <div class="sidebar-foot">
+      <div class="avatar">KC</div>
+      <div class="who">
+        <div class="n">Karen Castañeda</div>
+        <div class="r">Ingeniera clínica</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="crumbs" id="crumbs">SIST-EB / <b>Dashboard</b></div>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="showView('dashboard')">Dashboard</button>
+        <button class="tab-btn" onclick="showView('ficha')">Hoja de vida</button>
+        <button class="tab-btn" onclick="showView('asistente')">Asistente IA</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        Buscar equipo, serie, alerta…
+      </div>
+    </div>
+
+    <!-- ===================== DASHBOARD ===================== -->
+    <div class="view active" id="view-dashboard">
+      <h1 class="page-title">Dashboard general</h1>
+      <p class="page-sub">Indicadores consolidados de la flota de electrobisturíes — periodo agosto 2026</p>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="label">Disponibilidad</div>
+          <div class="value">96<span class="unit">%</span></div>
+          <div class="delta up">▲ 2.1% vs. mes anterior</div>
+        </div>
+        <div class="kpi">
+          <div class="label">MTBF</div>
+          <div class="value">480<span class="unit">h</span></div>
+          <div class="delta up">▲ 34h vs. mes anterior</div>
+        </div>
+        <div class="kpi">
+          <div class="label">MTTR</div>
+          <div class="value">2.3<span class="unit">h</span></div>
+          <div class="delta down">▼ 0.4h vs. mes anterior</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Cumplimiento preventivo</div>
+          <div class="value">91<span class="unit">%</span></div>
+          <div class="delta up">▲ 5% vs. mes anterior</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Mantenimientos ejecutados por mes</h3>
+          <p class="card-sub">Preventivos vs. correctivos — últimos 6 meses</p>
+          <div class="bars">
+            <div class="bar-col"><div class="bar" style="height:58%"></div><div class="m">Mar</div></div>
+            <div class="bar-col"><div class="bar" style="height:71%"></div><div class="m">Abr</div></div>
+            <div class="bar-col"><div class="bar" style="height:44%"></div><div class="m">May</div></div>
+            <div class="bar-col"><div class="bar" style="height:83%"></div><div class="m">Jun</div></div>
+            <div class="bar-col"><div class="bar" style="height:65%"></div><div class="m">Jul</div></div>
+            <div class="bar-col"><div class="bar" style="height:95%;background:linear-gradient(180deg,#14304D,#0E2438);"></div><div class="m">Ago</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Alertas activas</h3>
+          <p class="card-sub">3 equipos requieren atención</p>
+          <div class="alert-item">
+            <div class="dot crit"></div>
+            <div>
+              <div class="t">EB-021 · Falla reportada <span class="tag crit">Crítica</span></div>
+              <div class="d">Alarma REM activa — sin contacto de placa de retorno</div>
+            </div>
+          </div>
+          <div class="alert-item">
+            <div class="dot warn"></div>
+            <div>
+              <div class="t">EB-014 · Mantenimiento vencido <span class="tag warn">Media</span></div>
+              <div class="d">Preventivo programado hace 4 días</div>
+            </div>
+          </div>
+          <div class="alert-item">
+            <div class="dot warn"></div>
+            <div>
+              <div class="t">EB-009 · Stock bajo <span class="tag warn">Media</span></div>
+              <div class="d">Electrodos de retorno: 2 unidades restantes</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Inventario de equipos</h3>
+        <p class="card-sub">Electrobisturíes registrados en la plataforma</p>
+        <table>
+          <thead>
+            <tr><th>Equipo</th><th>Ubicación</th><th>Último mantenimiento</th><th>Próximo mantenimiento</th><th>Estado</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="row-name">Valleylab FT10</span><br><span class="row-sub id-mono">EB-014</span></td>
+              <td>Quirófano 3</td>
+              <td>10/06/2026</td>
+              <td>12/09/2026</td>
+              <td><span class="status-pill warn"><span class="sd"></span>Vencido</span></td>
+            </tr>
+            <tr>
+              <td><span class="row-name">ESU-2400</span><br><span class="row-sub id-mono">EB-021</span></td>
+              <td>Quirófano 1</td>
+              <td>02/03/2026</td>
+              <td>02/09/2026</td>
+              <td><span class="status-pill crit"><span class="sd"></span>Falla</span></td>
+            </tr>
+            <tr>
+              <td><span class="row-name">Force FX-8C</span><br><span class="row-sub id-mono">EB-009</span></td>
+              <td>Quirófano 2</td>
+              <td>28/07/2026</td>
+              <td>28/10/2026</td>
+              <td><span class="status-pill ok"><span class="sd"></span>Activo</span></td>
+            </tr>
+            <tr>
+              <td><span class="row-name">Valleylab FT10</span><br><span class="row-sub id-mono">EB-006</span></td>
+              <td>Sala de procedimientos</td>
+              <td>15/08/2026</td>
+              <td>15/11/2026</td>
+              <td><span class="status-pill ok"><span class="sd"></span>Activo</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===================== FICHA / HOJA DE VIDA ===================== -->
+    <div class="view" id="view-ficha">
+      <h1 class="page-title">Hoja de vida del equipo</h1>
+      <p class="page-sub">Ficha técnica, historial y documentación del electrobisturí</p>
+
+      <div class="eq-header">
+        <div class="eq-photo">
+          <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6"><path d="M6 3v6a3 3 0 003 3v9M12 21v-9a3 3 0 003-3V3M18 3v18"/></svg>
+        </div>
+        <div class="eq-info">
+          <div class="eq-name-row">
+            <h2>Electrobisturí — Valleylab FT10</h2>
+            <span class="status-pill warn"><span class="sd"></span>Mantenimiento vencido</span>
+          </div>
+          <div class="eq-id">ID EB-014 &nbsp;·&nbsp; Serie VLB-FT10-000123</div>
+          <div class="spec-grid">
+            <div><div class="s-label">Fabricante</div><div class="s-val">Medtronic</div></div>
+            <div><div class="s-label">Año</div><div class="s-val">2019</div></div>
+            <div><div class="s-label">Servicio</div><div class="s-val">Cirugía general</div></div>
+            <div><div class="s-label">Ubicación</div><div class="s-val">Quirófano 3</div></div>
+          </div>
+        </div>
+        <div class="qr-box">
+          <svg width="54" height="54" viewBox="0 0 54 54"><rect width="54" height="54" fill="white"/>
+            <g fill="#14304D">
+              <rect x="2" y="2" width="14" height="14"/><rect x="6" y="6" width="6" height="6" fill="white"/>
+              <rect x="38" y="2" width="14" height="14"/><rect x="42" y="6" width="6" height="6" fill="white"/>
+              <rect x="2" y="38" width="14" height="14"/><rect x="6" y="42" width="6" height="6" fill="white"/>
+              <rect x="20" y="2" width="4" height="4"/><rect x="28" y="2" width="4" height="4"/>
+              <rect x="20" y="10" width="4" height="4"/><rect x="20" y="20" width="4" height="4"/>
+              <rect x="28" y="20" width="4" height="4"/><rect x="36" y="20" width="4" height="4"/>
+              <rect x="44" y="24" width="4" height="4"/><rect x="20" y="28" width="4" height="4"/>
+              <rect x="20" y="36" width="4" height="4"/><rect x="28" y="36" width="4" height="4"/>
+              <rect x="36" y="36" width="4" height="4"/><rect x="44" y="40" width="4" height="4"/>
+              <rect x="28" y="44" width="4" height="4"/><rect x="36" y="44" width="4" height="4"/>
+            </g>
+          </svg>
+          <span style="font-size:9.5px;color:var(--text-soft);font-weight:600;">EB-014</span>
+        </div>
+      </div>
+
+      <div class="vitals">
+        <div class="vital-card">
+          <div class="vl">Corriente de fuga</div>
+          <div class="vv">42<span> µA</span></div>
+          <svg class="wave" width="100%" height="26" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="0,18 20,10 40,20 60,6 80,16 100,9 120,19 140,8 160,17 180,11 200,15" fill="none" stroke="#2C9C92" stroke-width="2"/></svg>
+        </div>
+        <div class="vital-card">
+          <div class="vl">Potencia de salida</div>
+          <div class="vv">98<span>% spec</span></div>
+          <svg class="wave" width="100%" height="26" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="0,14 20,15 40,13 60,14 80,12 100,14 120,13 140,14 160,12 180,13 200,14" fill="none" stroke="#2C9C92" stroke-width="2"/></svg>
+        </div>
+        <div class="vital-card">
+          <div class="vl">Contacto placa REM</div>
+          <div class="vv">OK</div>
+          <svg class="wave" width="100%" height="26" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="0,20 20,19 40,20 60,18 80,20 100,19 120,20 140,19 160,20 180,18 200,19" fill="none" stroke="#2C9C92" stroke-width="2"/></svg>
+        </div>
+      </div>
+
+      <div class="sub-tabs">
+        <div class="sub-tab active">Historial de mantenimiento</div>
+        <div class="sub-tab">Accesorios e inventario</div>
+        <div class="sub-tab">Documentación técnica</div>
+      </div>
+
+      <div class="card">
+        <div class="timeline">
+          <div class="t-item">
+            <div class="t-dot warn"></div>
+            <div class="t-body">
+              <div class="t-title">Mantenimiento preventivo — pendiente</div>
+              <div class="t-meta">Programado 12/09/2026 · Vencido hace 4 días</div>
+            </div>
+          </div>
+          <div class="t-item">
+            <div class="t-dot ok"></div>
+            <div class="t-body">
+              <div class="t-title">Mantenimiento preventivo — ejecutado</div>
+              <div class="t-meta">10/06/2026 · Téc. Camila Rojas</div>
+              <div class="t-desc">Verificación de seguridad eléctrica: fuga de corriente 38 µA (dentro de especificación). Prueba de potencia de salida conforme. Sin hallazgos.</div>
+            </div>
+          </div>
+          <div class="t-item">
+            <div class="t-dot warn"></div>
+            <div class="t-body">
+              <div class="t-title">Mantenimiento correctivo — placa de retorno</div>
+              <div class="t-meta">02/03/2026 · Téc. Andrés Peña</div>
+              <div class="t-desc">Reemplazo de cable de la placa de retorno por daño en el conector. Se validó alarma REM tras la intervención.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== ASISTENTE IA ===================== -->
+    <div class="view" id="view-asistente">
+      <h1 class="page-title">Asistente técnico IA</h1>
+      <p class="page-sub">Responde únicamente con base en la documentación cargada del equipo, citando la fuente</p>
+
+      <div class="chat-wrap">
+        <div class="chat-panel">
+          <div class="chat-head">
+            <div class="ai-dot"></div>
+            <div>
+              <b>Asistente SIST-EB</b><br>
+              <span>Contexto activo: Electrobisturí EB-014 · Valleylab FT10</span>
+            </div>
+          </div>
+          <div class="chat-body">
+            <div class="msg user">¿Qué significa la alarma REM?</div>
+            <div class="msg ai">
+              La alarma REM (Return Electrode Monitoring) indica que el sistema detectó un contacto insuficiente entre la placa de retorno y la piel del paciente. Esto puede deberse a un electrodo mal adherido, un cable dañado o un área de contacto insuficiente.<br><br>
+              Acción recomendada: verificar la adhesión de la placa, inspeccionar el cable de conexión y confirmar que el área de piel esté limpia y seca antes de reintentar.
+              <div class="cite">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/><path d="M14 3v6h6"/></svg>
+                Manual de servicio Valleylab FT10 — sección 4.2
+              </div>
+            </div>
+            <div class="msg user">¿Qué mantenimiento preventivo requiere este equipo?</div>
+            <div class="msg ai">
+              Según el protocolo cargado, el electrobisturí requiere mantenimiento preventivo trimestral que incluye: prueba de fuga de corriente, verificación de potencia de salida en los modos de corte y coagulación, inspección de cables y electrodos, y prueba funcional del sistema REM.
+              <div class="cite">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/><path d="M14 3v6h6"/></svg>
+                Protocolo de mantenimiento preventivo — v2.1
+              </div>
+            </div>
+          </div>
+          <div class="chat-input">
+            <input type="text" placeholder="Escribe tu pregunta sobre este equipo…">
+            <button class="send-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="side-panel">
+          <div class="card">
+            <h3>Documentos cargados</h3>
+            <p class="card-sub">Base de conocimiento del equipo</p>
+            <div class="doc-chip">
+              <div class="doc-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/></svg></div>
+              <div><div class="doc-name">Manual de servicio FT10</div><div class="doc-meta">PDF · 84 páginas</div></div>
+            </div>
+            <div class="doc-chip">
+              <div class="doc-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/></svg></div>
+              <div><div class="doc-name">Protocolo preventivo v2.1</div><div class="doc-meta">PDF · 12 páginas</div></div>
+            </div>
+            <div class="doc-chip">
+              <div class="doc-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/></svg></div>
+              <div><div class="doc-name">IEC 60601-2-2 (resumen)</div><div class="doc-meta">PDF · 6 páginas</div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Preguntas sugeridas</h3>
+            <div class="suggestion">¿Qué IEC aplica a este equipo?</div>
+            <div class="suggestion">¿Qué instrumento necesito para la prueba de fuga?</div>
+            <div class="suggestion">¿Cada cuánto se cambia el cable REM?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showView(name){
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  const idx = {dashboard:0, ficha:1, asistente:2}[name];
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+  const labels = {dashboard:'Dashboard', ficha:'Hoja de vida', asistente:'Asistente IA'};
+  document.getElementById('crumbs').innerHTML = 'SIST-EB / <b>' + labels[name] + '</b>';
+  if(name==='dashboard') document.querySelectorAll('.nav-item')[0].classList.add('active');
+  if(name==='ficha') document.querySelectorAll('.nav-item')[1].classList.add('active');
+  if(name==='asistente') document.querySelectorAll('.nav-item')[4].classList.add('active');
+}
+</script>
+</body>
+</html>
