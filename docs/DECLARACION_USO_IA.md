@@ -1,20 +1,17 @@
-# Declaración de Uso de Inteligencia Artificial — Entrega 1
+# Declaración de Uso de Inteligencia Artificial — Entregas 2 y 3 (unificadas)
 
-**Herramienta utilizada:** [completar, p. ej. Claude]
+**Herramienta utilizada:** Claude (Anthropic) — Claude Code.
 
-**Finalidad:**
-Apoyo en la organización de la documentación, generación de diagramas técnicos descriptivos (diagrama de bloques del equipo, arquitectura de la plataforma, diagrama de flujo del proceso de mantenimiento, modelo entidad-relación), redacción inicial de secciones del documento, diseño del modelo de base de datos y construcción del mockup interactivo de interfaz.
+**Finalidad:** apoyo para programar la plataforma funcional, organizar la documentación, generar la interfaz, diseñar el asistente (RAG) y redactar la base de conocimiento inicial y los manuales.
 
 **Módulos desarrollados con apoyo de IA:**
-- Estructura general del documento de Entrega 1
-- Diagrama de bloques del electrobisturí
-- Diagrama de arquitectura de la plataforma
-- Diagrama de flujo del proceso de mantenimiento
-- Modelo entidad-relación (ERD) y script SQL
-- Mockup HTML interactivo (dashboard, hoja de vida, asistente IA)
-- Guion de sustentación
+- Servidor, base de datos SQLite, API y cálculo de indicadores (MTBF, MTTR, disponibilidad, cumplimiento).
+- Interfaz web: dashboard, hoja de vida, inventario, mantenimiento, checklists, resultados, gemelo digital, QR, reportes.
+- Asistente de IA con recuperación de documentos (BM25) y respuestas extractivas con cita.
+- Plantillas de checklist y árbol de diagnóstico de fallas.
+- Cronograma con diagrama de Gantt y documento integrado de las tres entregas (`docs/Proyecto_SIST-EB_Entregas_1-2-3.docx`).
+- Documentos base de conocimiento (`src/server/knowledge/`), Manual de usuario, Manual técnico y guion de video.
 
-**Verificación realizada por el grupo:**
-[completar — cada integrante debe registrar aquí qué revisó y validó específicamente: por ejemplo, verificación de la normativa citada contra la fuente oficial, validación del modelo de datos contra los casos de uso reales, revisión de que el mockup refleje fielmente los módulos exigidos por el curso, etc.]
+**Verificación realizada por el grupo:** [completar — cada integrante debe registrar qué revisó: normas citadas contra su texto oficial, límites de las plantillas contra el manual del fabricante, cálculo de indicadores, funcionamiento del QR y del asistente].
 
-**Nota:** Ningún resultado de prueba funcional, dato experimental o conclusión técnica fue generado automáticamente por la IA sin análisis del grupo, en cumplimiento de la política del curso.
+**Datos de demostración:** los registros marcados DEMO fueron generados como ejemplo para mostrar la interfaz; **no son resultados de pruebas reales** y deben eliminarse antes de la presentación final. Los resultados de pruebas funcionales, mediciones y conclusiones técnicas del informe corresponden al análisis del grupo; la plataforma no los genera.

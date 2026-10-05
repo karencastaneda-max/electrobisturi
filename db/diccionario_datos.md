@@ -79,3 +79,23 @@ Cuentas del sistema.
 
 ## consultas_ia
 Registro de interacciones con el asistente de inteligencia artificial, con la fuente citada en cada respuesta (principio de no-invención de información).
+
+---
+## Ampliaciones de las Entregas 2 y 3 (implementadas en `src/server/schema.sql`, SQLite)
+
+| Tabla | Campos añadidos / nuevos | Uso |
+|---|---|---|
+| equipos | frecuencia_pm_dias, corriente_nominal_a, potencia_max_w, clase_aplicada, registro_invima, criticidad, observaciones, manual_fds, es_demo | Programación de preventivos, criterio de consumo, parte aplicada B/BF/CF |
+| accesorios | stock_minimo, referencia, es_demo | Alertas de stock bajo |
+| mantenimientos | falla, horas_fuera_servicio, causa, acciones, repuestos, es_demo | MTBF, MTTR y disponibilidad |
+| checklists | plantilla_codigo, observaciones, analisis_tecnico, es_demo | Pruebas funcionales con análisis del técnico |
+| checklist_items | orden, seccion, tipo (bool/num), limite_min, limite_max, componente, norma, instrumento, si_falla | Criterios de aceptación y gemelo digital |
+| evidencias | equipo_id, descripcion, autor_id | Fotos por equipo |
+| documentacion | origen (base/usuario), paginas | Manuales y base de conocimiento |
+| doc_chunks | documento_id, seccion, pagina, contenido | Fragmentos indexados para el asistente |
+| plantillas_checklist | codigo, nombre, items_json | Plantillas de checklist |
+| alertas | severidad | Alertas calculadas automáticamente |
+| consultas_ia | respondida | Registro de preguntas al asistente |
+| sesiones, config | — | Autenticación y configuración (URL base del QR) |
+
+Los registros con `es_demo=1` son datos de demostración y se eliminan desde *Administración*.

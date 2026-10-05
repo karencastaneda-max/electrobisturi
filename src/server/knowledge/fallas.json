@@ -1,0 +1,78 @@
+[
+  {"id":"no_enciende","sintoma":"El equipo no enciende","componente":"alimentacion","severidad":"alta",
+   "descripcion":"Sin respuesta al presionar el interruptor; pantalla apagada.",
+   "causas":[
+     {"causa":"Tomacorriente sin tensión o cable de alimentación dañado","verificar":"Probar el tomacorriente con otro equipo y revisar continuidad del cable.","instrumento":"Multímetro"},
+     {"causa":"Fusible de entrada abierto","verificar":"Inspeccionar y medir continuidad del fusible. Si se funde de nuevo, hay un cortocircuito: no subir el valor del fusible.","instrumento":"Multímetro"},
+     {"causa":"Fuente de alimentación defectuosa","verificar":"Medir las tensiones de salida de la fuente según el manual de servicio.","instrumento":"Multímetro"},
+     {"causa":"Falla en la placa de control","verificar":"Descartar las causas anteriores y derivar a servicio técnico.","instrumento":"Manual de servicio"}
+   ],"accion":"Si hay riesgo eléctrico, retirar de servicio y registrar mantenimiento correctivo."},
+  {"id":"sin_potencia","sintoma":"Enciende pero no entrega potencia al activar","componente":"generador","severidad":"alta",
+   "descripcion":"El equipo se ve normal pero al activar no hay corte ni coagulación.",
+   "causas":[
+     {"causa":"Alarma REM activa (placa de retorno mal conectada)","verificar":"Revisar la placa, el cable y la pantalla de alarma.","instrumento":"Inspección visual"},
+     {"causa":"Pedal o lápiz defectuoso, o modo/potencia mal ajustados","verificar":"Probar con otro pedal y otro lápiz; revisar el modo y la potencia.","instrumento":"Accesorio de reemplazo"},
+     {"causa":"Cable del electrodo activo cortado","verificar":"Medir continuidad del cable del electrodo.","instrumento":"Multímetro"},
+     {"causa":"Falla en la etapa de potencia u oscilador","verificar":"Medir la potencia de salida con el analizador; salida nula confirma la falla.","instrumento":"Analizador de electrobisturí"}
+   ],"accion":"Registrar correctivo y adjuntar la medición del analizador como evidencia."},
+  {"id":"alarma_rem","sintoma":"Suena la alarma de placa de retorno (REM)","componente":"rem","severidad":"alta",
+   "descripcion":"Alarma de contacto o de cable de placa de retorno.",
+   "causas":[
+     {"causa":"Placa mal adherida, gel seco, vencida o incompatible","verificar":"Reemplazar por una placa nueva compatible y adherirla completamente.","instrumento":"Placa de retorno nueva"},
+     {"causa":"Cable de la placa cortado o conector flojo","verificar":"Probar con otro cable de placa y revisar continuidad.","instrumento":"Multímetro"},
+     {"causa":"Circuito de monitoreo REM defectuoso","verificar":"Con placa y cable nuevos y alarma persistente, probar el REM con el adaptador del analizador.","instrumento":"Analizador de electrobisturí"}
+   ],"accion":"No usar el equipo si el REM no funciona correctamente; registrar correctivo."},
+  {"id":"potencia_baja","sintoma":"Potencia medida menor que la ajustada","componente":"generador","severidad":"media",
+   "descripcion":"El analizador mide una potencia inferior al ajuste fuera de tolerancia.",
+   "causas":[
+     {"causa":"Carga de prueba o cable incorrectos","verificar":"Repetir con la carga especificada y otro cable.","instrumento":"Analizador de electrobisturí"},
+     {"causa":"Alta resistencia de contacto en conectores o cables","verificar":"Limpiar conectores y medir continuidad.","instrumento":"Multímetro"},
+     {"causa":"Degradación de la etapa de potencia o descalibración","verificar":"Confirmar con mediciones en varios puntos de potencia y comparar con la tendencia previa.","instrumento":"Analizador de electrobisturí"}
+   ],"accion":"Si se confirma, ajuste o reparación por servicio técnico; no usar mientras no esté conforme."},
+  {"id":"potencia_alta","sintoma":"Potencia medida mayor que la ajustada","componente":"generador","severidad":"critica",
+   "descripcion":"La salida supera el ajuste: riesgo de quemadura para el paciente.",
+   "causas":[
+     {"causa":"Falla de control o de realimentación de potencia","verificar":"Repetir la medición en varios puntos; si se confirma, retirar el equipo.","instrumento":"Analizador de electrobisturí"},
+     {"causa":"Error de medición (carga o modo incorrectos)","verificar":"Verificar la carga y el modo del analizador.","instrumento":"Analizador de electrobisturí"}
+   ],"accion":"Retirar de servicio de inmediato, evaluar reporte de tecnovigilancia y reparar con servicio técnico."},
+  {"id":"pedal","sintoma":"El pedal no activa el equipo o activa el modo equivocado","componente":"pedal","severidad":"media",
+   "descripcion":"Falta de activación, activación intermitente o modo cruzado.",
+   "causas":[
+     {"causa":"Conector sucio o mal insertado","verificar":"Limpiar y reinsertar el conector.","instrumento":"Inspección visual"},
+     {"causa":"Cable roto o microinterruptor desgastado","verificar":"Medir continuidad de cada contacto al presionar.","instrumento":"Multímetro"},
+     {"causa":"Ingreso de líquidos al pedal","verificar":"Inspeccionar la carcasa y los residuos.","instrumento":"Inspección visual"}
+   ],"accion":"Reemplazar el pedal si está dañado y registrar el cambio como correctivo."},
+  {"id":"electrodo_caliente","sintoma":"El lápiz o el cable se calienta o produce chispas","componente":"electrodo_activo","severidad":"alta",
+   "descripcion":"Calentamiento anormal o chispas en el accesorio.",
+   "causas":[
+     {"causa":"Electrodo sucio con tejido carbonizado o mal insertado","verificar":"Limpiar o reemplazar el electrodo y reinsertarlo.","instrumento":"Electrodo de reemplazo"},
+     {"causa":"Aislamiento del cable o del lápiz dañado","verificar":"Inspeccionar el cable en toda su longitud.","instrumento":"Inspección visual"}
+   ],"accion":"Retirar el accesorio dañado y registrar el consumible repuesto en el inventario."},
+  {"id":"fuga_alta","sintoma":"Corriente de fuga fuera de límite","componente":"alimentacion","severidad":"alta",
+   "descripcion":"El analizador de seguridad eléctrica reporta fuga por encima del límite.",
+   "causas":[
+     {"causa":"Cable de alimentación o conexión de tierra deficiente","verificar":"Medir la resistencia de tierra y revisar el cable.","instrumento":"Analizador de seguridad eléctrica"},
+     {"causa":"Humedad o contaminación por líquidos","verificar":"Inspección interna y secado según el manual.","instrumento":"Inspección visual"},
+     {"causa":"Deterioro del aislamiento o del filtro de red","verificar":"Repetir la medición en condición normal y falla única.","instrumento":"Analizador de seguridad eléctrica"}
+   ],"accion":"Retirar de servicio mientras la fuga exceda el límite."},
+  {"id":"consumo_alto","sintoma":"El equipo consume más corriente que la especificada","componente":"generador","severidad":"alta",
+   "descripcion":"La corriente medida supera la corriente nominal de la placa del equipo.",
+   "causas":[
+     {"causa":"Tensión de red distinta a la nominal o medición en modo incorrecto","verificar":"Medir la tensión de red y repetir en condiciones controladas.","instrumento":"Multímetro"},
+     {"causa":"Ventilación obstruida o ventilador defectuoso","verificar":"Limpiar rejillas y verificar el ventilador.","instrumento":"Inspección visual"},
+     {"causa":"Componente degradado en la fuente o en la etapa de potencia","verificar":"Comparar con la tendencia de mediciones previas y derivar a servicio técnico.","instrumento":"Analizador de seguridad eléctrica"}
+   ],"accion":"Si se confirma, retirar de servicio y registrar correctivo; el riesgo es sobrecalentamiento."},
+  {"id":"codigo_error","sintoma":"Código de error o autotest fallido al encender","componente":"generador","severidad":"media",
+   "descripcion":"La pantalla muestra un código de error o el autotest no termina.",
+   "causas":[
+     {"causa":"Falla transitoria","verificar":"Apagar, esperar unos segundos y encender de nuevo.","instrumento":"Ninguno"},
+     {"causa":"Falla persistente de hardware","verificar":"Anotar el código y consultar la tabla de errores del manual de servicio.","instrumento":"Manual de servicio"}
+   ],"accion":"Si se repite, no usar el equipo; adjuntar la foto del error como evidencia en el correctivo."},
+  {"id":"interferencia","sintoma":"Interferencia con otros equipos al activar","componente":"cableado","severidad":"media",
+   "descripcion":"Ruido o fallas en monitores u otros equipos durante la activación.",
+   "causas":[
+     {"causa":"Cables del paciente cerca de los cables del electrobisturí","verificar":"Separar y reorganizar cables.","instrumento":"Inspección visual"},
+     {"causa":"Mal contacto de la placa o de la tierra","verificar":"Verificar la placa de retorno y la conexión de tierra.","instrumento":"Inspección visual"},
+     {"causa":"Fuga de alta frecuencia elevada","verificar":"Medir la corriente de fuga de alta frecuencia.","instrumento":"Analizador de electrobisturí"}
+   ],"accion":"Reducir la potencia al mínimo necesario y revisar la compatibilidad electromagnética."}
+]

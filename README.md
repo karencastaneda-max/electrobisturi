@@ -52,7 +52,9 @@ Ver diagramas completos en [`/docs/diagramas`](./docs/diagramas).
 │   └── diccionario_datos.md
 ├── mockups/                  → Boceto de interfaz de alta fidelidad
 │   └── SIST-EB_Mockup_Interactivo.html
-├── src/                      → Código fuente (se completa a partir de la Entrega 2)
+├── src/server/               → API, base de datos, IA (RAG) y base de conocimiento
+├── src/web/                  → Interfaz web (SPA)
+├── data/                     → Base SQLite y archivos subidos (se crea al iniciar)
 └── README.md
 ```
 
@@ -83,8 +85,24 @@ mockups/SIST-EB_Mockup_Interactivo.html
 ## 📅 Estado del proyecto
 
 - [x] **Entrega 1** — Diseño e ingeniería clínica *(completada)*
-- [ ] **Entrega 2** — Prototipo funcional
-- [ ] **Entrega 3** — Plataforma completa
+- [x] **Entrega 2 + 3 (unificadas)** — Plataforma funcional completa (ver abajo)
+
+## 🚀 Plataforma funcional (Entregas 2 y 3)
+
+```bash
+python3 src/server/app.py        # solo requiere Python 3.9+
+```
+Abra `http://localhost:8765` (el servidor también imprime la URL de red para el celular). Usuario demo: `camila.rojas@sist-eb.local` · clave `sisteb2026`.
+
+**Incluye:** base de datos SQLite · hoja de vida · inventario · mantenimiento (preventivo/correctivo/predictivo) · checklists medibles · resultados con tablas, gráficas e interpretación · dashboard con disponibilidad, MTBF, MTTR y cumplimiento · **códigos QR escaneables** con ficha de campo · evidencias fotográficas · carga de manuales (PDF/TXT/MD) · **asistente de IA con RAG** que cita fuentes y no inventa · diagnóstico de fallas · gemelo digital básico · informe técnico imprimible · usuarios y roles.
+
+**Cronograma:** menú *Cronograma (Gantt)* con el diagrama de Gantt editable del proyecto y del mantenimiento preventivo.
+
+Documento integrado de las tres entregas: [`docs/Proyecto_SIST-EB_Entregas_1-2-3.docx`](docs/Proyecto_SIST-EB_Entregas_1-2-3.docx) · capturas en [`docs/capturas`](docs/capturas).
+
+Documentación: [`docs/MANUAL_USUARIO.md`](docs/MANUAL_USUARIO.md) · [`docs/MANUAL_TECNICO.md`](docs/MANUAL_TECNICO.md) · [`docs/GUION_VIDEO.md`](docs/GUION_VIDEO.md).
+
+> ⚠️ Los registros marcados **DEMO** son ejemplos, no resultados reales. Elimínelos en *Administración* y cargue las mediciones del grupo antes de sustentar.
 
 ## 🤖 Declaración de uso de inteligencia artificial
 
